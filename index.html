@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Omniverse Sports Engine</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #050816;
+      color: #e5e7eb;
+    }
+    header {
+      padding: 32px 10%;
+      background: radial-gradient(circle at top left, #22d3ee, #4f46e5 45%, #020617 80%);
+      color: white;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 32px;
+    }
+    h2 {
+      margin-top: 32px;
+      font-size: 22px;
+      color: #e5e7ff;
+    }
+    p {
+      line-height: 1.6;
+      color: #cbd5f5;
+    }
+    main {
+      padding: 24px 10% 40px;
+    }
+    code {
+      background: #020617;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-size: 90%;
+    }
+    .card {
+      background: rgba(15,23,42,0.9);
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin-top: 16px;
+      border: 1px solid rgba(148,163,184,0.25);
+    }
+    ol, ul {
+      padding-left: 20px;
+    }
+    a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .diagram {
+      font-family: "SF Mono", Menlo, monospace;
+      white-space: pre;
+      background: #020617;
+      padding: 12px 14px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 12px;
+      margin-top: 6px;
+    }
+    footer {
+      padding: 16px 10% 32px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Omniverse Sports Engine</h1>
+    <p>
+      Underdog-goal signal engine for football prediction markets 
+    </p>
+  </header>
+
+  <main>
+    <section class="card">
+      <h2>Engine overview</h2>
+      <p>
+        The engine watches for goal events in football matches, flags cases where the scoring team is an underdog,
+        and then fires a BUY signal to capture the price move that usually follows a goal shock.
+      </p>
+      <div class="diagram">
+Live score feed  →  Match store  →  Decision engine  →  Order executor
+                         ↓                               ↓
+                     (underdog?)                    Trades / logs
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Repository & markets targeted</h2>
+      <p>
+        Code & docs: 
+        <a href="https://github.com/urvashi1256/omniverse-sports-engine">
+          github.com/urvashi1256/omniverse-sports-engine
+        </a>
+      </p>
+      <ul>
+        <li><strong>Engine name:</strong> Omniverse Football Underdog Engine</li>
+        <li><strong>Markets targeted:</strong> football / soccer match-winner markets on prediction exchanges
+            (e.g. Kalshi / Polymarket–style YES/NO contracts).</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>How to run the demo</h2>
+      <ol>
+        <li>Clone the repo: <code>git clone https://github.com/urvashi1256/omniverse-sports-engine.git</code></li>
+        <li>Enter the folder: <code>cd omniverse-sports-engine</code></li>
+        <li>Install dependencies: <code>pip install -r requirements.txt</code></li>
+        <li>Run a single simulated goal signal: <code>python demo.py</code></li>
+        <li>Run the looping engine: <code>python main.py</code> (Ctrl+C to stop)</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2>Architecture & components</h2>
+      <ul>
+        <li><strong>Score feed / normalizer:</strong> simplified in this version as an in-memory goal writer.</li>
+        <li><strong>Decision engine:</strong> tags a scoring team as underdog based on configurable rules.</li>
+        <li><strong>Order executor:</strong> prints simulated BUY orders and would plug into an exchange API.</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Known limitations</h2>
+      <ul>
+        <li>Uses a synthetic goal feed instead of live SofaScore / Livescore scraping.</li>
+        <li>Order placement is simulated; no real Kalshi / Polymarket orders are sent.</li>
+        <li>No persistence layer yet; state is kept in memory for clarity.</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    Built by Urvashi for the Omniverse Fund assignment.
+  </footer>
+</body>
+</html>
